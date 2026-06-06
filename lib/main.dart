@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:prog_calc/calculator.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'screen/calculator.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
-class MainApp extends StatefulWidget {
+class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
   @override
-  State<MainApp> createState() => _MainAppState();
-}
-
-class _MainAppState extends State<MainApp> {
-  final _fontFamily = 'SometypeMono';
-
-  @override
   Widget build(BuildContext context) {
+    final fontFamily = GoogleFonts.sometypeMono().fontFamily;
+
     return MaterialApp(
+      title: 'PROG_CALC',
       themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.green,
-        fontFamily: _fontFamily,
+        fontFamily: fontFamily,
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.green,
         brightness: Brightness.dark,
-        fontFamily: _fontFamily,
+        fontFamily: fontFamily,
       ),
-      home: const Calculator(),
+      home: const CalculatorScreen(),
     );
   }
 }

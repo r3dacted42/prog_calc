@@ -2,20 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class CalcKeypad extends StatelessWidget {
-  const CalcKeypad({
-    super.key,
-    required this.onKeyPress,
-    required this.mode,
-  });
-
   final Function(String) onKeyPress;
   final String mode;
 
-  Widget _space({double? width, double? height}) {
-    return SizedBox(
-      width: width ?? 8.0,
-      height: height ?? 9.0,
-    );
+  const CalcKeypad({super.key, required this.onKeyPress, required this.mode});
+
+  Widget _space({double width = 8.0, double height = 9.0}) {
+    return SizedBox(width: width, height: height);
   }
 
   @override
@@ -25,6 +18,7 @@ class CalcKeypad extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            // Top Row: Radix Selectors
             SizedBox(
               height: 40.0,
               child: Row(
@@ -33,30 +27,32 @@ class CalcKeypad extends StatelessWidget {
                   KeypadButton(
                     label: "dec",
                     onKeyPressed: onKeyPress,
-                    isActive: (mode == "dec"),
+                    isActive: mode == "dec",
                   ),
                   _space(),
                   KeypadButton(
                     label: "bin",
                     onKeyPressed: onKeyPress,
-                    isActive: (mode == "bin"),
+                    isActive: mode == "bin",
                   ),
                   _space(),
                   KeypadButton(
                     label: "oct",
                     onKeyPressed: onKeyPress,
-                    isActive: (mode == "oct"),
+                    isActive: mode == "oct",
                   ),
                   _space(),
                   KeypadButton(
                     label: "hex",
                     onKeyPressed: onKeyPress,
-                    isActive: (mode == "hex"),
+                    isActive: mode == "hex",
                   ),
                 ],
               ),
             ),
             _space(height: 16),
+
+            // Keypad Grid
             Expanded(
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,28 +60,16 @@ class CalcKeypad extends StatelessWidget {
                   KeypadButton(
                     label: "a",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode != 'hex'),
+                    isDisabled: mode != 'hex',
                   ),
                   _space(),
-                  KeypadButton(
-                    label: "<<",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "<<", onKeyPressed: onKeyPress),
                   _space(),
-                  KeypadButton(
-                    label: ">>",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: ">>", onKeyPressed: onKeyPress),
                   _space(),
-                  KeypadButton(
-                    label: "clr",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "clr", onKeyPressed: onKeyPress),
                   _space(),
-                  KeypadButton(
-                    label: "bksp",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "bksp", onKeyPressed: onKeyPress),
                 ],
               ),
             ),
@@ -97,28 +81,16 @@ class CalcKeypad extends StatelessWidget {
                   KeypadButton(
                     label: "b",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode != 'hex'),
+                    isDisabled: mode != 'hex',
                   ),
                   _space(),
-                  KeypadButton(
-                    label: "(",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "(", onKeyPressed: onKeyPress),
                   _space(),
-                  KeypadButton(
-                    label: ")",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: ")", onKeyPressed: onKeyPress),
                   _space(),
-                  KeypadButton(
-                    label: "%",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "%", onKeyPressed: onKeyPress),
                   _space(),
-                  KeypadButton(
-                    label: "/",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "/", onKeyPressed: onKeyPress),
                 ],
               ),
             ),
@@ -130,31 +102,28 @@ class CalcKeypad extends StatelessWidget {
                   KeypadButton(
                     label: "c",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode != 'hex'),
+                    isDisabled: mode != 'hex',
                   ),
                   _space(),
                   KeypadButton(
                     label: "7",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode == "bin"),
+                    isDisabled: mode == "bin",
                   ),
                   _space(),
                   KeypadButton(
                     label: "8",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode == "bin" || mode == "oct"),
+                    isDisabled: mode == "bin" || mode == "oct",
                   ),
                   _space(),
                   KeypadButton(
                     label: "9",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode == "bin" || mode == "oct"),
+                    isDisabled: mode == "bin" || mode == "oct",
                   ),
                   _space(),
-                  KeypadButton(
-                    label: "*",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "*", onKeyPressed: onKeyPress),
                 ],
               ),
             ),
@@ -166,31 +135,28 @@ class CalcKeypad extends StatelessWidget {
                   KeypadButton(
                     label: "d",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode != 'hex'),
+                    isDisabled: mode != 'hex',
                   ),
                   _space(),
                   KeypadButton(
                     label: "4",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode == "bin"),
+                    isDisabled: mode == "bin",
                   ),
                   _space(),
                   KeypadButton(
                     label: "5",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode == "bin"),
+                    isDisabled: mode == "bin",
                   ),
                   _space(),
                   KeypadButton(
                     label: "6",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode == "bin"),
+                    isDisabled: mode == "bin",
                   ),
                   _space(),
-                  KeypadButton(
-                    label: "-",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "-", onKeyPressed: onKeyPress),
                 ],
               ),
             ),
@@ -202,30 +168,24 @@ class CalcKeypad extends StatelessWidget {
                   KeypadButton(
                     label: "e",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode != 'hex'),
+                    isDisabled: mode != 'hex',
                   ),
                   _space(),
-                  KeypadButton(
-                    label: "1",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "1", onKeyPressed: onKeyPress),
                   _space(),
                   KeypadButton(
                     label: "2",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode == "bin"),
+                    isDisabled: mode == "bin",
                   ),
                   _space(),
                   KeypadButton(
                     label: "3",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode == "bin"),
+                    isDisabled: mode == "bin",
                   ),
                   _space(),
-                  KeypadButton(
-                    label: "+",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "+", onKeyPressed: onKeyPress),
                 ],
               ),
             ),
@@ -237,22 +197,13 @@ class CalcKeypad extends StatelessWidget {
                   KeypadButton(
                     label: "f",
                     onKeyPressed: onKeyPress,
-                    isDisabled: (mode != 'hex'),
+                    isDisabled: mode != 'hex',
                   ),
+                  _space(), const KeypadButton(), // Empty spacer
+                  _space(), KeypadButton(label: "0", onKeyPressed: onKeyPress),
+                  _space(), const KeypadButton(), // Empty spacer
                   _space(),
-                  const KeypadButton(),
-                  _space(),
-                  KeypadButton(
-                    label: "0",
-                    onKeyPressed: onKeyPress,
-                  ),
-                  _space(),
-                  const KeypadButton(),
-                  _space(),
-                  KeypadButton(
-                    label: "mem+",
-                    onKeyPressed: onKeyPress,
-                  ),
+                  KeypadButton(label: "mem+", onKeyPressed: onKeyPress),
                 ],
               ),
             ),
@@ -264,62 +215,66 @@ class CalcKeypad extends StatelessWidget {
 }
 
 class KeypadButton extends StatelessWidget {
+  final String? label;
+  final Function(String)? onKeyPressed;
+  final bool isActive;
+  final bool isDisabled;
+
   const KeypadButton({
     super.key,
     this.label,
     this.onKeyPressed,
-    this.isActive,
-    this.isDisabled,
+    this.isActive = false,
+    this.isDisabled = false,
   });
-
-  final String? label;
-  final Function(String)? onKeyPressed;
-  final bool? isActive;
-  final bool? isDisabled;
 
   @override
   Widget build(BuildContext context) {
-    var bgColor = Theme.of(context).colorScheme.background;
-    var fgColor = Theme.of(context).colorScheme.primary;
-    var hasAction = !((isDisabled ?? false) || (isActive ?? false));
-
-    if (isDisabled ?? false) {
-      bgColor = Theme.of(context).colorScheme.secondary;
-      fgColor = Theme.of(context).colorScheme.secondary;
-    }
-    if (isActive ?? false) {
-      bgColor = Theme.of(context).colorScheme.primary;
-      fgColor = Theme.of(context).colorScheme.onPrimary;
+    if (label == null || onKeyPressed == null) {
+      return Expanded(child: Container());
     }
 
-    if (label != null && onKeyPressed != null) {
-      return Expanded(
-        child: TextButton(
-          onPressed: hasAction ? () => onKeyPressed!(label!) : null,
-          style: ButtonStyle(
-            shape: MaterialStatePropertyAll(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                side: BorderSide(
-                  width: 1,
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-              ),
+    final colorScheme = Theme.of(context).colorScheme;
+
+    // Determine Modern Colors
+    Color bgColor = colorScheme.surface;
+    Color fgColor = colorScheme.primary;
+
+    if (isDisabled) {
+      bgColor = colorScheme.surfaceContainerHighest;
+      fgColor = colorScheme.onSurfaceVariant.withAlpha(0);
+    } else if (isActive) {
+      bgColor = colorScheme.primary;
+      fgColor = colorScheme.onPrimary;
+    }
+
+    return Expanded(
+      child: TextButton(
+        focusNode: FocusNode(canRequestFocus: false),
+        onPressed: isDisabled ? null : () => onKeyPressed!(label!),
+        style: ButtonStyle(
+          shape: WidgetStatePropertyAll(
+            // Fixed M3 Deprecation
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              side: BorderSide(width: 1, color: colorScheme.outlineVariant),
             ),
-            backgroundColor: MaterialStatePropertyAll(bgColor),
-            foregroundColor: MaterialStatePropertyAll(fgColor),
           ),
-          child: AutoSizeText(
-            label!,
-            maxLines: 1,
-            minFontSize: 15,
-            maxFontSize: 30,
-            overflow: TextOverflow.visible,
-            style: const TextStyle(fontSize: 30),
+          backgroundColor: WidgetStatePropertyAll(bgColor),
+          foregroundColor: WidgetStatePropertyAll(fgColor),
+          overlayColor: WidgetStatePropertyAll(
+            colorScheme.primary.withAlpha(50),
           ),
         ),
-      );
-    }
-    return Expanded(child: Container());
+        child: AutoSizeText(
+          label!,
+          maxLines: 1,
+          minFontSize: 15,
+          maxFontSize: 30,
+          overflow: TextOverflow.visible,
+          style: const TextStyle(fontSize: 30),
+        ),
+      ),
+    );
   }
 }
