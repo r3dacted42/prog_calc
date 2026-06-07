@@ -13,7 +13,6 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-  // Initialize the single source of truth for the calculator state
   late final CalculatorController _controller;
 
   @override
@@ -40,7 +39,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             actions: [
-              // Use a Builder to get a context that is "inside" the Scaffold
               Builder(
                 builder: (context) {
                   return IconButton(
@@ -54,7 +52,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               ),
             ],
           ),
-          // Attach the custom end drawer here
           endDrawer: MemoryDrawer(controller: _controller),
 
           body: Builder(
@@ -71,13 +68,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       } else if (key == 'mem+') {
                         bool wasAdded = _controller.addToMemory();
                         if (wasAdded) {
-                          // Use the original context for the Messenger
                           ScaffoldMessenger.of(context).clearSnackBars();
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: const Text(
-                                'Saved to memory. Open drawer to insert.',
-                              ),
+                              content: const Text('Saved to memory.'),
                               duration: const Duration(seconds: 2),
                               action: SnackBarAction(
                                 label: 'VIEW',

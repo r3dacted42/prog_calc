@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'screen/calculator.dart';
 
 void main() {
@@ -11,7 +10,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fontFamily = GoogleFonts.sometypeMono().fontFamily;
+    final fontFamily = 'SometypeMono';
 
     return MaterialApp(
       title: 'PROG_CALC',

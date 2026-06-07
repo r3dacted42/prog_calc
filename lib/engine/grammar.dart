@@ -5,8 +5,8 @@ class Grammar {
     final int radix = getRadix(mode);
     final builder = ExpressionBuilder<BigInt>();
 
-    final numberParser = _getPatternForRadix(
-      radix,
+    final numberParser = pattern(
+      getPatternForRadix(radix),
     ).plus().flatten().map((value) => BigInt.parse(value, radix: radix));
 
     builder.primitive(
@@ -49,16 +49,16 @@ class Grammar {
     }
   }
 
-  static Parser _getPatternForRadix(int radix) {
+  static String getPatternForRadix(int radix) {
     switch (radix) {
       case 2:
-        return pattern('01');
+        return '01';
       case 8:
-        return pattern('0-7');
+        return '0-7';
       case 16:
-        return pattern('0-9a-fA-F');
+        return '0-9a-fA-F';
       default:
-        return pattern('0-9');
+        return '0-9';
     }
   }
 }

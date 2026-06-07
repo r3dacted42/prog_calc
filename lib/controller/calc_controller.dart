@@ -23,6 +23,9 @@ class CalculatorController extends ChangeNotifier {
 
   void setInputMode(String mode) {
     if (_inputMode == mode) return;
+    _updateTextField(
+      Evaluator.convertExpression(textController.text, _inputMode, mode),
+    );
     _inputMode = mode;
     _updateEvaluation();
     notifyListeners();
@@ -114,10 +117,13 @@ class CalculatorController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _updateTextField(String text, TextSelection selection) {
+  void _updateTextField(String text, [TextSelection? selection]) {
     if (!focusNode.hasFocus) focusNode.requestFocus();
     Future.microtask(() {
-      textController.value = TextEditingValue(text: text, selection: selection);
+      textController.value = TextEditingValue(
+        text: text,
+        selection: selection ?? TextSelection.collapsed(offset: text.length),
+      );
       _updateEvaluation();
       notifyListeners();
     });

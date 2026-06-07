@@ -20,8 +20,30 @@ class Evaluator {
           return "invalid";
       }
     } catch (e) {
-      print(e);
       return "overflow";
     }
+  }
+
+  static String convertExpression(
+    String expression,
+    String oldMode,
+    String newMode,
+  ) {
+    if (expression.isEmpty) return expression;
+
+    int oldRadix = Grammar.getRadix(oldMode);
+    int newRadix = Grammar.getRadix(newMode);
+
+    String pattern = Grammar.getPatternForRadix(oldRadix);
+
+    return expression.replaceAllMapped(RegExp('[$pattern]+'), (match) {
+      String numStr = match.group(0)!;
+      BigInt? parsed = BigInt.tryParse(numStr, radix: oldRadix);
+
+      if (parsed != null) {
+        return parsed.toRadixString(newRadix);
+      }
+      return numStr;
+    });
   }
 }
