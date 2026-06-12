@@ -54,42 +54,44 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           ),
           endDrawer: MemoryDrawer(controller: _controller),
 
-          body: Builder(
-            builder: (innerContext) {
-              return Column(
-                children: [
-                  CalcInput(label: 'INPUT', controller: _controller),
-                  CalcOutput(label: 'OUTPUT', value: _controller.output),
-                  CalcKeypad(
-                    mode: _controller.inputMode,
-                    onKeyPress: (key) {
-                      if (['dec', 'bin', 'oct', 'hex'].contains(key)) {
-                        _controller.setInputMode(key);
-                      } else if (key == 'mem+') {
-                        bool wasAdded = _controller.addToMemory();
-                        if (wasAdded) {
-                          ScaffoldMessenger.of(context).clearSnackBars();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: const Text('Saved to memory.'),
-                              duration: const Duration(seconds: 2),
-                              action: SnackBarAction(
-                                label: 'VIEW',
-                                onPressed: () {
-                                  Scaffold.of(innerContext).openEndDrawer();
-                                },
+          body: SafeArea(
+            child: Builder(
+              builder: (innerContext) {
+                return Column(
+                  children: [
+                    CalcInput(label: 'INPUT', controller: _controller),
+                    CalcOutput(label: 'OUTPUT', value: _controller.output),
+                    CalcKeypad(
+                      mode: _controller.inputMode,
+                      onKeyPress: (key) {
+                        if (['dec', 'bin', 'oct', 'hex'].contains(key)) {
+                          _controller.setInputMode(key);
+                        } else if (key == 'mem+') {
+                          bool wasAdded = _controller.addToMemory();
+                          if (wasAdded) {
+                            ScaffoldMessenger.of(context).clearSnackBars();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: const Text('Saved to memory.'),
+                                duration: const Duration(seconds: 2),
+                                action: SnackBarAction(
+                                  label: 'VIEW',
+                                  onPressed: () {
+                                    Scaffold.of(innerContext).openEndDrawer();
+                                  },
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          }
+                        } else {
+                          _controller.handleKeyPress(key);
                         }
-                      } else {
-                        _controller.handleKeyPress(key);
-                      }
-                    },
-                  ),
-                ],
-              );
-            },
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         );
       },

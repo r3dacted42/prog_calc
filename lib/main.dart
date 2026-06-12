@@ -27,6 +27,7 @@ class MainApp extends StatelessWidget {
         fontFamily: fontFamily,
       ),
       home: const CalculatorScreen(),
+      // debugShowCheckedModeBanner: false,
     );
   }
 }
